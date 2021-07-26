@@ -2,7 +2,7 @@ package com.mist.testingtool.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -13,31 +13,29 @@ import org.apache.kafka.common.TopicPartition;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class KafkaUtil {
 
-    public static void findInLastMinutes(Map<String, String> params, int minute) {
-        long lastHourMilli = LocalDateTime.now().minusMinutes(minute).atZone(ZoneId.systemDefault()).toInstant()
-                .toEpochMilli();
+    private static KafkaConsumer<String, String> getConsumer() {
         Properties props = new Properties();
         props.put("bootstrap.servers", "10.100.0.221:9092");
         props.put("group.id", "unionTargetJs-testing-0521");
-        String topic = "unionTargetJs";
         props.put("key.deserializer",
                 "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer",
                 "org.apache.kafka.common.serialization.StringDeserializer");
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+        return consumer;
+    }
+
+    public static void query(String topic, int minute, Map<String, String> params) {
+        KafkaConsumer<String, String> consumer = getConsumer();
+        long lastHourMilli = LocalDateTime.now().minusMinutes(minute).atZone(ZoneId.systemDefault()).toInstant()
+                .toEpochMilli();
         // 获取topic的partition信息
         List<PartitionInfo> partitionInfos = consumer.partitionsFor(topic);
         List<TopicPartition> topicPartitions = new ArrayList<>();
@@ -76,44 +74,35 @@ public class KafkaUtil {
                 JSONObject jsonObject = JSON.parseObject(value);
                 String id = jsonObject.getString("id");
                 String mmsi = jsonObject.getString("mmsi");
-                long receiveTime = jsonObject.getLong("receiveTime");
+//                long receiveTime = jsonObject.getLong("receiveTime");
+                if(jsonObject.getLong("alarmTime") == null){
+                    continue;
+                }
+                long receiveTime = jsonObject.getLong("alarmTime");
                 int state = jsonObject.getIntValue("state");
                 Double longitude = jsonObject.getDouble("longitude");
                 Double latitude = jsonObject.getDouble("latitude");
                 LocalDateTime time = LocalDateTime.ofInstant(Instant.ofEpochMilli(receiveTime), ZoneId.systemDefault());
-                if (mmsiParam != null && mmsi != null && mmsiParam.equals(mmsi) || idParam != null && idParam.equals(id)) {
+                if (mmsiParam != null && mmsiParam.equals(mmsi) || idParam != null && idParam.equals(id)) {
 //                    System.out.println(String.format("[%s] id %s mmsi %s state %s", time, id, mmsi,state));
 //                    log.info("[{}] id {} mmsi {} state {} lon {} lat {}", time, id, mmsi, state, longitude, latitude);
-                    log.info("[{}] {}", time,jsonObject);
+                    log.info("[{}] {}", time, jsonObject);
                 }
             }
         }
+
     }
+
 
     public static void main(String[] args) {
         printKafkaTarget();
-        method1();
-        method2();
-//        method3();
-    }
-
-    private static void method3() {
-        log.info("m3");
-    }
-
-    private static void method2() {
-        log.info("m2");
-    }
-
-    private static void method1() {
-        log.info("m1");
-        Executors.newSingleThreadScheduledExecutor().schedule(KafkaUtil::method3, 1, TimeUnit.SECONDS);
     }
 
     private static void printKafkaTarget() {
         HashMap<String, String> param = new HashMap<>();
-        param.put("mmsi", "412743142");
+        param.put("mmsi", "100000062");
 //        param.put("id","6808225256216199168");
-        findInLastMinutes(param, 60);
+//        query("unionTargetJs", 60, param);
+        query("AlarmTargetTopic", 60, param);
     }
 }
