@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Class-Path: jackson-mapper-asl-1.9.2.jar jcip-annotations-1.0.jar bcpr
+ ov-jdk15on-1.51.jar azure-keyvault-0.9.3.jar mail-1.4.5.jar lang-tag-
+ 1.4.jar mssql-jdbc-6.1.0.jre8.jar gson-2.2.4.jar azure-core-0.9.3.jar
+  jackson-xc-1.9.2.jar jackson-core-asl-1.9.2.jar javax.inject-1.jar m
+ ybatis-generator-core-1.3.6.jar stax-api-1.0.1.jar jersey-client-1.13
+ .jar jersey-core-1.13.jar commons-lang3-3.3.1.jar oauth2-oidc-sdk-4.5
+ .jar httpclient-4.3.6.jar jaxb-impl-2.2.3-1.jar jettison-1.1.jar acti
+ vation-1.1.jar jersey-json-1.13.jar httpcore-4.3.3.jar adal4j-1.0.0.j
+ ar commons-logging-1.1.3.jar json-smart-1.1.1.jar jackson-jaxrs-1.9.2
+ .jar slf4j-api-1.7.5.jar nimbus-jose-jwt-3.1.2.jar commons-lang-2.6.j
+ ar stax-api-1.0-2.jar jaxb-api-2.2.2.jar commons-codec-1.10.jar
+Main-Class: Client
+

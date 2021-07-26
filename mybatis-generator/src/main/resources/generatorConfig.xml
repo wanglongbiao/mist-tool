@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties resource="jdbc.properties"/>
+    <classPathEntry
+            location="D:\_wang_work\_code\maven_repo\com\microsoft\sqlserver\mssql-jdbc\6.1.0.jre8\mssql-jdbc-6.1.0.jre8.jar"/>
+    <!--<classPathEntry location="D:\_wang_work\_code\MyGithub\ProjectTools\mybatis-generator"/>-->
+    <context id="context1" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="${driver}" connectionURL="${url}" userId="${username}"
+                        password="${password}"></jdbcConnection>
+        <javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <javaModelGenerator targetPackage="${package}.entity" targetProject="MAVEN">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+            <property name="" value="true"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="${mapperPackage}" targetProject="MAVEN">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${package}.dao" targetProject="MAVEN">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+        <table tableName="T\_%" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey column="dbid" sqlStatement="JDBC" identity="true"/>
+            <domainObjectRenamingRule searchString="^T" replaceString=""/>
+        </table>
+    </context>
+</generatorConfiguration>

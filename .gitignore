@@ -1,0 +1,9 @@
+.idea 
+.vscode
+.history
+node_modules 
+dist
+.parcel-cache
+__pycache__
+*.iml
+

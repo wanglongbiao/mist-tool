@@ -1,0 +1,322 @@
+[
+    {
+        "height": 58.0,
+        "id": 821,
+        "infrared": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/hb21_infrared_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/hb21_infrared_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=hb21_infrared_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/hb21i/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=hb21_infrared_sub&stream=stream",
+            "ip": "10.8.121.4",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/hb21_infrared_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/hb21_infrared_sub/stream"
+        },
+        "latitude": 39.225681304931641,
+        "longitude": 118.06654357910156,
+        "msg_type": 2,
+        "name": "21唐山丰南涧河",
+        "pan": 0.0,
+        "range": 10.0,
+        "server": {
+            "ip": "10.79.32.48",
+            "isnormal": true,
+            "port": 1935
+        },
+        "tilt": 0.0,
+        "whiteday": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/hb21_whiteday_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/hb21_whiteday_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=hb21_whiteday_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/hb21w/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=hb21_whiteday_sub&stream=stream",
+            "ip": "10.8.121.3",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/hb21_whiteday_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/hb21_whiteday_sub/stream"
+        }
+    },
+    {
+        "height": 45.0,
+        "id": 822,
+        "infrared": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/hb22_infrared_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/hb22_infrared_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=hb22_infrared_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/hb22i/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=hb22_infrared_sub&stream=stream",
+            "ip": "10.8.122.4",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/hb22_infrared_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/hb22_infrared_sub/stream"
+        },
+        "latitude": 39.297515869140625,
+        "longitude": 119.12237548828125,
+        "msg_type": 2,
+        "name": "22唐山乐亭老米沟",
+        "pan": 0.0,
+        "range": 20.0,
+        "server": {
+            "ip": "10.79.32.48",
+            "isnormal": true,
+            "port": 1935
+        },
+        "tilt": 0.0,
+        "whiteday": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/hb22_whiteday_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/hb22_whiteday_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=hb22_whiteday_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/hb22w/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=hb22_whiteday_sub&stream=stream",
+            "ip": "10.8.122.3",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/hb22_whiteday_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/hb22_whiteday_sub/stream"
+        }
+    },
+    {
+        "height": 50.0,
+        "id": 823,
+        "infrared": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/hb23_infrared_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/hb23_infrared_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=hb23_infrared_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/hb23i/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=hb23_infrared_sub&stream=stream",
+            "ip": "10.8.123.4",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/hb23_infrared_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/hb23_infrared_sub/stream"
+        },
+        "latitude": 39.159347534179687,
+        "longitude": 118.87520599365234,
+        "msg_type": 2,
+        "name": "23唐山乐亭北港",
+        "pan": 0.0,
+        "range": 20.0,
+        "server": {
+            "ip": "10.79.32.48",
+            "isnormal": true,
+            "port": 1935
+        },
+        "tilt": 0.0,
+        "whiteday": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/hb23_whiteday_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/hb23_whiteday_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=hb23_whiteday_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/hb23w/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=hb23_whiteday_sub&stream=stream",
+            "ip": "10.8.123.3",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/hb23_whiteday_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/hb23_whiteday_sub/stream"
+        }
+    },
+    {
+        "height": 50.0,
+        "id": 824,
+        "infrared": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/hb24_infrared_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/hb24_infrared_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=hb24_infrared_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/hb24i/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=hb24_infrared_sub&stream=stream",
+            "ip": "",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/hb24_infrared_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/hb24_infrared_sub/stream"
+        },
+        "latitude": 38.978347778320312,
+        "longitude": 118.40237426757812,
+        "msg_type": 2,
+        "name": "24唐山冀东油田",
+        "pan": 0.0,
+        "range": 20.0,
+        "server": {
+            "ip": "10.79.32.48",
+            "isnormal": true,
+            "port": 1935
+        },
+        "tilt": 0.0,
+        "whiteday": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/hb24_whiteday_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/hb24_whiteday_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=hb24_whiteday_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/hb24w/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=hb24_whiteday_sub&stream=stream",
+            "ip": "",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/hb24_whiteday_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/hb24_whiteday_sub/stream"
+        }
+    },
+    {
+        "height": 70.0,
+        "id": 743,
+        "infrared": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/sd43_infrared_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/sd43_infrared_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=sd43_infrared_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/sd43i/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=sd43_infrared_sub&stream=stream",
+            "ip": "10.7.143.4",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/sd43_infrared_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/sd43_infrared_sub/stream"
+        },
+        "latitude": 37.681179046630859,
+        "longitude": 120.25020599365234,
+        "msg_type": 2,
+        "name": "43烟台屺坶岛",
+        "pan": 0.0,
+        "range": 30.0,
+        "server": {
+            "ip": "10.79.32.48",
+            "isnormal": true,
+            "port": 1935
+        },
+        "tilt": 0.0,
+        "whiteday": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/sd43_whiteday_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/sd43_whiteday_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=sd43_whiteday_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/sd43w/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=sd43_whiteday_sub&stream=stream",
+            "ip": "10.7.143.3",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/sd43_whiteday_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/sd43_whiteday_sub/stream"
+        }
+    },
+    {
+        "height": 36.0,
+        "id": 851,
+        "infrared": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/hb51_infrared_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/hb51_infrared_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=hb51_infrared_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/hb51i/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=hb51_infrared_sub&stream=stream",
+            "ip": "10.8.151.4",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/hb51_infrared_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/hb51_infrared_sub/stream"
+        },
+        "latitude": 38.746181488037109,
+        "longitude": 117.71437835693359,
+        "msg_type": 2,
+        "name": "51天津大港LNG码头",
+        "pan": 0.0,
+        "range": 20.0,
+        "server": {
+            "ip": "10.79.32.48",
+            "isnormal": true,
+            "port": 1935
+        },
+        "tilt": 0.0,
+        "whiteday": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/hb51_whiteday_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/hb51_whiteday_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=hb51_whiteday_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/hb51w/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=hb51_whiteday_sub&stream=stream",
+            "ip": "10.8.151.3",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/hb51_whiteday_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/hb51_whiteday_sub/stream"
+        }
+    },
+    {
+        "height": 97.0,
+        "id": 953,
+        "infrared": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/hb53_infrared_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/hb53_infrared_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=hb53_infrared_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/hb53i/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=hb53_infrared_sub&stream=stream",
+            "ip": "10.9.153.4",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/hb53_infrared_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/hb53_infrared_sub/stream"
+        },
+        "latitude": 39.617179870605469,
+        "longitude": 121.44937896728516,
+        "msg_type": 2,
+        "name": "53大连长兴岛金海明珠",
+        "pan": 0.0,
+        "range": 20.0,
+        "server": {
+            "ip": "10.79.32.48",
+            "isnormal": true,
+            "port": 1935
+        },
+        "tilt": 0.0,
+        "whiteday": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/hb53_whiteday_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/hb53_whiteday_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=hb53_whiteday_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/hb53w/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=hb53_whiteday_sub&stream=stream",
+            "ip": "10.9.153.3",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/hb53_whiteday_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/hb53_whiteday_sub/stream"
+        }
+    },
+    {
+        "height": 30.0,
+        "id": 762,
+        "infrared": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/sd62_infrared_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/sd62_infrared_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=sd62_infrared_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/sd62i/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=sd62_infrared_sub&stream=stream",
+            "ip": "10.7.162.4",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/sd62_infrared_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/sd62_infrared_sub/stream"
+        },
+        "latitude": 38.017181396484375,
+        "longitude": 118.96871185302734,
+        "msg_type": 2,
+        "name": "62东营中心渔港",
+        "pan": 0.0,
+        "range": 30.0,
+        "server": {
+            "ip": "10.79.32.48",
+            "isnormal": true,
+            "port": 1935
+        },
+        "tilt": 0.0,
+        "whiteday": {
+            "httphlsmainurl": "http://10.79.32.48:5580/hls/sd62_whiteday_main.m3u8",
+            "httphlsuburl": "http://10.79.32.48:5580/hls/sd62_whiteday_sub.m3u8",
+            "httpmainurl": "http://10.79.32.48:5580/live?app=HlxApp&stream=sd62_whiteday_main",
+            "httppicurl": "http://10.79.32.48:5580/filesys/sd62w/screenshot.jpeg",
+            "httpsuburl": "http://10.79.32.48:5580/live?app=sd62_whiteday_sub&stream=stream",
+            "ip": "10.7.162.3",
+            "isnormal": true,
+            "port": 554,
+            "rtmpmainurl": "rtmp://10.79.32.48:1935/HlxApp/sd62_whiteday_main",
+            "rtmpsuburl": "rtmp://10.79.32.48:1935/sd62_whiteday_sub/stream"
+        }
+    }
+]
