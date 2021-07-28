@@ -76,10 +76,10 @@ def save_file(z, x, y, path):
     log.info(f'get {url}')
     if r.status_code != 200:
         sleep_in_second = sleep_in_second * 2
-        log.error(
-            f'status code != 200, sleep {sleep_in_second}s {r.reason}')
-        time.sleep(sleep_in_second)
-        save_file(z, x, y, path)
+        # log.error(
+        #     f'status code != 200, sleep {sleep_in_second}s {r.reason}')
+        # time.sleep(sleep_in_second)
+        # save_file(z, x, y, path)
         return
 
     with open(filename, 'wb') as fd:
@@ -112,6 +112,6 @@ if __name__ == '__main__':
     # 福建
     # download_by_rectangle(116.63873, 26.292242, 121.050683, 22.690904, 16, 17)
     # 天津中海油
-    download(0, 13)
-    download_by_rectangle(113, 42, 128, 31, 14, 16)
+    download(12, 12)
+    download_by_rectangle(113, 42, 128, 31, 13, 16)
     print('------------------------------------------------------')

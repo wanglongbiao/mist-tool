@@ -14,8 +14,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class KafkaUtil {
@@ -67,6 +65,8 @@ public class KafkaUtil {
 
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(1000);
+            if (records.count() <= 1) break;
+//            log.info("length " + records.count());
             for (ConsumerRecord<String, String> record : records) {
                 // System.out.println("partition = " + record.partition() + ", offset = " +
                 // record.offset());
@@ -74,8 +74,15 @@ public class KafkaUtil {
                 JSONObject jsonObject = JSON.parseObject(value);
                 String id = jsonObject.getString("id");
                 String mmsi = jsonObject.getString("mmsi");
+                String alarmCode = jsonObject.getString("alarmCode");
 //                long receiveTime = jsonObject.getLong("receiveTime");
-                if(jsonObject.getLong("alarmTime") == null){
+                if (jsonObject.getLong("alarmTime") == null) {
+                    continue;
+                }
+                String alarmCodeParam = params.get("alarmCode");
+                if (alarmCodeParam != null && (!alarmCodeParam.equals(alarmCode))
+                        || mmsiParam != null && mmsiParam.equals(mmsi)
+                        || idParam != null && idParam.equals(id)) {
                     continue;
                 }
                 long receiveTime = jsonObject.getLong("alarmTime");
@@ -83,12 +90,11 @@ public class KafkaUtil {
                 Double longitude = jsonObject.getDouble("longitude");
                 Double latitude = jsonObject.getDouble("latitude");
                 LocalDateTime time = LocalDateTime.ofInstant(Instant.ofEpochMilli(receiveTime), ZoneId.systemDefault());
-                if (mmsiParam != null && mmsiParam.equals(mmsi) || idParam != null && idParam.equals(id)) {
+                log.info("[{}] {}", time, jsonObject);
 //                    System.out.println(String.format("[%s] id %s mmsi %s state %s", time, id, mmsi,state));
 //                    log.info("[{}] id {} mmsi {} state {} lon {} lat {}", time, id, mmsi, state, longitude, latitude);
-                    log.info("[{}] {}", time, jsonObject);
-                }
             }
+//            log.info("after for...");
         }
 
     }
@@ -100,9 +106,11 @@ public class KafkaUtil {
 
     private static void printKafkaTarget() {
         HashMap<String, String> param = new HashMap<>();
-        param.put("mmsi", "100000062");
-//        param.put("id","6808225256216199168");
+//        param.put("mmsi", "100000062");
+//        param.put("alarmCode", "20");// 非法搭靠
+//        param.put("id","6825363070786912256");
 //        query("unionTargetJs", 60, param);
         query("AlarmTargetTopic", 60, param);
+        log.info("end...");
     }
 }
