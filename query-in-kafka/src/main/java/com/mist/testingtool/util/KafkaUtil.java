@@ -75,17 +75,17 @@ public class KafkaUtil {
                 String id = jsonObject.getString("id");
                 String mmsi = jsonObject.getString("mmsi");
                 String alarmCode = jsonObject.getString("alarmCode");
-//                long receiveTime = jsonObject.getLong("receiveTime");
+                long receiveTime = jsonObject.getLong("receiveTime")!=null?jsonObject.getLong("receiveTime"):jsonObject.getLong("alarmTime");
+//                long receiveTime = jsonObject.getLong("alarmTime");
                 if (jsonObject.getLong("alarmTime") == null) {
-                    continue;
+//                    continue;
                 }
                 String alarmCodeParam = params.get("alarmCode");
                 if (alarmCodeParam != null && (!alarmCodeParam.equals(alarmCode))
-                        || mmsiParam != null && mmsiParam.equals(mmsi)
-                        || idParam != null && idParam.equals(id)) {
+                        || mmsiParam != null && (!mmsiParam.equals(mmsi))
+                        || idParam != null && (!idParam.equals(id))) {
                     continue;
                 }
-                long receiveTime = jsonObject.getLong("alarmTime");
                 int state = jsonObject.getIntValue("state");
                 Double longitude = jsonObject.getDouble("longitude");
                 Double latitude = jsonObject.getDouble("latitude");
@@ -106,11 +106,13 @@ public class KafkaUtil {
 
     private static void printKafkaTarget() {
         HashMap<String, String> param = new HashMap<>();
-//        param.put("mmsi", "100000062");
+//        param.put("mmsi", "100000070");
 //        param.put("alarmCode", "20");// 非法搭靠
-//        param.put("id","6825363070786912256");
-//        query("unionTargetJs", 60, param);
-        query("AlarmTargetTopic", 60, param);
+//        param.put("alarmCode", "29");// 航向错误
+//        param.put("alarmCode", "25");// 首次进入
+        param.put("id","6831743778505801765");
+        query("unionTargetJs", 60, param);
+//        query("AlarmTargetTopic", 160, param);
         log.info("end...");
     }
 }

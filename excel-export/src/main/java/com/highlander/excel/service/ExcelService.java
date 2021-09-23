@@ -124,7 +124,7 @@ public class ExcelService implements CommandLineRunner {
         String userName = row.getCell(1).getStringCellValue();
         String key = userName + endDateTime.toLocalDate();
         LocalDateTime startWorkTime = startWorkMap.get(key);
-        if (startWorkTime == null || startWorkTime.plusHours(9).isAfter(endDateTime)) {
+        if (startWorkTime == null || startWorkTime.plusHours(4).isAfter(endDateTime)) {
             logger.info("错误的加班记录，key:{} start:{} clock:{}", key, startWorkTime, endDateTime);
             return;
         }
@@ -264,6 +264,9 @@ public class ExcelService implements CommandLineRunner {
                 currentFileDate = currentFileDate.replace("-", "");
             }
         }
+        if (currentFileDate == null){
+            currentFileDate = LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE);
+        }
         return ExcelService.class.getClassLoader().getResource("").getPath() + currentFileDate;
     }
 
@@ -280,7 +283,7 @@ public class ExcelService implements CommandLineRunner {
         long start = System.currentTimeMillis();
         logger.info("#### start ####");
         doWork();
-//        openDestPath();
+        openDestPath();
         long end = System.currentTimeMillis();
         logger.info("#### end #### takes(s):" + ((end - start) / 1000.0));
     }
@@ -289,7 +292,7 @@ public class ExcelService implements CommandLineRunner {
         String destPath = getDestPath();
         try {
             Runtime.getRuntime().exec("cmd /c start " + destPath.substring(1));
-            Runtime.getRuntime().exec("cmd /c start " + destPath.substring(1) + "/加班统计-王龙彪-20191220.xlsx");
+//            Runtime.getRuntime().exec("cmd /c start " + destPath.substring(1) + "/加班统计-王龙彪-20191220.xlsx");
         } catch (IOException e) {
             e.printStackTrace();
         }
