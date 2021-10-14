@@ -2,6 +2,7 @@ package com.mist.testingtool;
 
 import com.mist.testingtool.entity.User;
 import com.mist.testingtool.util.CopyUtil;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.lang.reflect.Field;
@@ -10,7 +11,7 @@ import java.lang.reflect.Field;
 public class TestingToolApplication {
 
     public static void main(String[] args) throws IllegalAccessException {
-//        SpringApplication.run(TestingToolApplication.class, args);
+        SpringApplication.run(TestingToolApplication.class, args);
 //        User p1 = new User();
 //        p1.setUsername("zhang san");
 //        p1.setPassword("sdsdsdsd");

@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: hscpDBHlx
+    url: jdbc:mysql://10.103.0.31:3306/hscp?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: hscpDBHlx
+#    url: jdbc:mysql://10.100.0.128:3306/hscp?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
