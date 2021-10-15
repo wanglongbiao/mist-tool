@@ -1,11 +1,7 @@
 package com.mist.testingtool;
 
-import com.mist.testingtool.entity.User;
-import com.mist.testingtool.util.CopyUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.lang.reflect.Field;
 
 @SpringBootApplication
 public class TestingToolApplication {

@@ -3,7 +3,6 @@ package com.mist.testingtool.util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +17,6 @@ import java.util.regex.Pattern;
 @Component
 public class AisShipDatabaseUtil implements CommandLineRunner {
     private static Map<String, String> filedMap = new ConcurrentHashMap<>();
-    private SequenceGenerator sequenceGenerator = new SequenceGenerator();
 
     static {
         filedMap.put("ship_cnname", "vessel_name");
@@ -34,6 +32,7 @@ public class AisShipDatabaseUtil implements CommandLineRunner {
         filedMap.put("update_time", "update_time");
     }
 
+    private SequenceGenerator sequenceGenerator = new SequenceGenerator();
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -52,6 +51,7 @@ public class AisShipDatabaseUtil implements CommandLineRunner {
         log.info("size {}", list.size());
         FileWriter writer = new FileWriter("result.sql");
         writer.append("-- start " + LocalDateTime.now() + " \n");
+        writer.append("delete from mscode_syhy_ship;\n");
         String line = "INSERT INTO mscode_syhy_ship(`id`, `ship_cnname`, `ship_enname`, `ship_type`, `ship_mmsi`, `ship_callsign`, `ship_imo`, " +
                 "`ship_beidou`, `ship_length`, `ship_width`, `ship_nationality`, `ship_homeport`, `ship_tonnage`, `ship_photo`, `creator`, `create_time`, `update_time`, `remark`) ";
         for (Map<String, Object> map : list) {
@@ -78,14 +78,16 @@ public class AisShipDatabaseUtil implements CommandLineRunner {
                 values.add("61"); // non null, landtool1
                 continue;
             }
-            Object srcField = map.get(filedMap.get(destField));
-            if (srcField == null) {
+            String srcField = filedMap.get(destField);
+            Object srcFieldValue = map.get(srcField);
+            if (srcFieldValue == null) {
                 values.add("NULL");
             } else {
-                if (srcField instanceof String || srcField instanceof Date) {
-                    values.add(String.format("'%s'", srcField));
+                if (srcFieldValue instanceof String || srcFieldValue instanceof Date) {
+                    srcFieldValue = srcFieldValue.toString().replaceAll("['\\\\]", "_");
+                    values.add(String.format("'%s'", srcFieldValue));
                 } else {
-                    values.add(String.format("%s", srcField));
+                    values.add(String.format("%s", srcFieldValue));
                 }
             }
 //            log.info("find {} {}", destField, matcher.groupCount());
