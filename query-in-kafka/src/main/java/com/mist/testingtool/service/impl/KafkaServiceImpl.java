@@ -8,10 +8,10 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.consumer.OffsetAndTimestamp;
 import org.apache.kafka.common.PartitionInfo;
 import org.apache.kafka.common.TopicPartition;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -27,13 +27,14 @@ import lombok.extern.slf4j.Slf4j;
 public class KafkaServiceImpl implements KafkaService {
     @Override
     public void queryByText(String topic, String keyword, String startTime) {
-       queryByText(topic,keyword,startTime, LocalDateTime.now().toString());
+        queryByText(topic, keyword, startTime, LocalDateTime.now().toString());
     }
 
     @Override
     public void queryByText(String topic, String keyword, String startTime, String endTime) {
         KafkaConsumer<String, String> consumer = getConsumer();
         long startTimeInMillis = LocalDateTime.parse(startTime).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        long endTimeInMillis = LocalDateTime.parse(endTime).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
         List<PartitionInfo> partitionInfos = consumer.partitionsFor(topic);
         List<TopicPartition> topicPartitionList = new ArrayList<>();
         Map<TopicPartition, Long> startTimeToSearch = new HashMap<>();
@@ -44,7 +45,7 @@ public class KafkaServiceImpl implements KafkaService {
         }
         consumer.assign(topicPartitionList);
         // 获取每个partition一个小时之前的偏移量
-    Map<TopicPartition, OffsetAndTimestamp> map = consumer.offsetsForTimes(startTimeToSearch);
+        Map<TopicPartition, OffsetAndTimestamp> map = consumer.offsetsForTimes(startTimeToSearch);
         System.out.println("开始设置各分区初始偏移量...");
         for (Map.Entry<TopicPartition, OffsetAndTimestamp> entry : map.entrySet()) {
             // 如果设置的查询偏移量的时间点大于最大的索引记录时间，那么value就为空
@@ -60,9 +61,8 @@ public class KafkaServiceImpl implements KafkaService {
         }
         System.out.println("设置各分区初始偏移量结束...");
 
+        outter:
         while (true) {
-//            log.info("query...");
-//            ConsumerRecords<String, String> records = consumer.poll(1000);
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(20));
             if (records.count() <= 1) {
                 log.info("count: {}", records.count());
@@ -70,13 +70,17 @@ public class KafkaServiceImpl implements KafkaService {
             }
             for (ConsumerRecord<String, String> record : records) {
                 String data = record.value();
-                record.timestamp();
+                long timestamp = record.timestamp();
+                if (timestamp > endTimeInMillis) {
+                    log.info("end time: {}", LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault()).toString());
+                    break outter;
+                }
                 if (data.contains(keyword)) {
-                    log.info("find {}", data);
+                    log.info("time: {}, find {}", LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault()).toString(), data);
                 }
             }
         }
-//        log.info("end..");
+        log.info("end..");
     }
 
     private KafkaConsumer<String, String> getConsumer() {

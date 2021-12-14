@@ -19,6 +19,6 @@ class KafkaServiceImplTest {
         String endTime = "2021-12-10T01:00:00";
         String topic = "center-alarm";
 //        kafkaService.queryByText(topic, "1", startTime);
-        kafkaService.queryByText(topic, "1", startTime, endTime);
+        kafkaService.queryByText(topic, "1464172539176685568", startTime, endTime);
     }
 }
