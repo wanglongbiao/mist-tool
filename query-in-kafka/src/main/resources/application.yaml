@@ -1,4 +1,6 @@
 spring:
+  kafka:
+    bootstrap-servers: 10.100.0.221:9092
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     username: root

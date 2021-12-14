@@ -14,7 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Slf4j
-@Component
+//@Component
 public class AisShipDatabaseUtil implements CommandLineRunner {
     private static Map<String, String> filedMap = new ConcurrentHashMap<>();
 
