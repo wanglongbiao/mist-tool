@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -60,7 +61,7 @@ public class KafkaServiceImpl implements KafkaService {
             }
         }
         System.out.println("设置各分区初始偏移量结束...");
-
+        Pattern pattern = Pattern.compile(keyword);
         outter:
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(20));
@@ -75,7 +76,7 @@ public class KafkaServiceImpl implements KafkaService {
                     log.info("end time: {}", LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault()).toString());
                     break outter;
                 }
-                if (data.contains(keyword)) {
+                if (pattern.matcher(data).find()) {
                     log.info("time: {}, find {}", LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault()).toString(), data);
                 }
             }
