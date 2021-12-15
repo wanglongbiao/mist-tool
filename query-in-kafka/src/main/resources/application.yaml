@@ -1,13 +1,15 @@
 spring:
-  kafka:
-    bootstrap-servers: 10.100.0.221:9092
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    #    password: hscpDBHlx
-    url: jdbc:mysql://virtual:3306/hscp?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+  thymeleaf:
+    cache: false
+#  kafka:
+#    bootstrap-servers: 10.100.0.221:9092
+#  datasource:
+#    type: com.zaxxer.hikari.HikariDataSource
+#    username: root
+#    password: root
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#        password: hscpDBHlx
+#    url: jdbc:mysql://virtual:3306/hscp?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
 #    username: root
 #    password: hscpDBHlx
 #    url: jdbc:mysql://10.100.0.128:3306/hscp?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai

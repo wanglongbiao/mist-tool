@@ -27,12 +27,13 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class KafkaServiceImpl implements KafkaService {
     @Override
-    public void queryByText(String topic, String keyword, String startTime) {
-        queryByText(topic, keyword, startTime, LocalDateTime.now().toString());
+    public void queryByText(String topic, String regex, String startTime) {
+        queryByText(topic, regex, startTime, LocalDateTime.now().toString());
     }
 
     @Override
-    public void queryByText(String topic, String keyword, String startTime, String endTime) {
+    public List<String> queryByText(String topic, String regex, String startTime, String endTime) {
+        List<String> resultList = new ArrayList<>();
         KafkaConsumer<String, String> consumer = getConsumer();
         long startTimeInMillis = LocalDateTime.parse(startTime).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
         long endTimeInMillis = LocalDateTime.parse(endTime).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
@@ -61,8 +62,8 @@ public class KafkaServiceImpl implements KafkaService {
             }
         }
         System.out.println("设置各分区初始偏移量结束...");
-        Pattern pattern = Pattern.compile(keyword);
-        outter:
+        Pattern pattern = Pattern.compile(regex);
+        outer:
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(20));
             if (records.count() <= 1) {
@@ -72,21 +73,26 @@ public class KafkaServiceImpl implements KafkaService {
             for (ConsumerRecord<String, String> record : records) {
                 String data = record.value();
                 long timestamp = record.timestamp();
+                String timestampString = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault()).toString();
                 if (timestamp > endTimeInMillis) {
-                    log.info("end time: {}", LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault()).toString());
-                    break outter;
+                    log.info("end time: {}", timestampString);
+                    resultList.add(String.format("end time: %s", timestampString));
+                    break outer;
                 }
                 if (pattern.matcher(data).find()) {
-                    log.info("time: {}, find {}", LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault()).toString(), data);
+                    log.info("time: {}, find {}", timestampString, data);
+                    resultList.add(String.format("time: %s, %s", timestampString, data));
                 }
             }
         }
         log.info("end..");
+        return resultList;
     }
 
     private KafkaConsumer<String, String> getConsumer() {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "10.100.0.214:9092");
+        props.put("bootstrap.servers", "10.134.162.204:9092");
+//        props.put("bootstrap.servers", "10.100.0.214:9092");
         props.put("group.id", "sub-center-testing-by-wlb");
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
