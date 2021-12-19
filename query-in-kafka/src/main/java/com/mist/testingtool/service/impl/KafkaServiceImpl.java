@@ -1,5 +1,7 @@
 package com.mist.testingtool.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.mist.testingtool.service.KafkaService;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -76,12 +78,15 @@ public class KafkaServiceImpl implements KafkaService {
                 String timestampString = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault()).toString();
                 if (timestamp > endTimeInMillis) {
                     log.info("end time: {}", timestampString);
-                    resultList.add(String.format("end time: %s", timestampString));
+//                    resultList.add(String.format("end time: %s", timestampString));
                     break outer;
                 }
                 if (pattern.matcher(data).find()) {
-                    log.info("time: {}, find {}", timestampString, data);
-                    resultList.add(String.format("time: %s, %s", timestampString, data));
+//                    log.info("time: {}, find {}", timestampString, data);
+//                    resultList.add(String.format("time: %s, %s", timestampString, data));
+                    JSONObject jsonObject = JSON.parseObject(data);
+                    jsonObject.put("timestamp", timestamp);
+                    resultList.add(jsonObject.toString());
                 }
             }
         }
@@ -91,12 +96,14 @@ public class KafkaServiceImpl implements KafkaService {
 
     private KafkaConsumer<String, String> getConsumer() {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "10.134.162.204:9092");
+//        props.put("bootstrap.servers", "10.134.162.204:9092");
+        props.put("bootstrap.servers", "10.58.76.10:9092");// center
 //        props.put("bootstrap.servers", "10.100.0.214:9092");
         props.put("group.id", "sub-center-testing-by-wlb");
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+        log.info("config: {}", props);
         return consumer;
     }
 }

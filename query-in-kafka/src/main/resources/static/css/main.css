@@ -1,0 +1,12 @@
+* {
+    margin: 0 auto;
+}
+
+body {
+    background-color: blueviolet;
+}
+
+input {
+    margin: 0;
+    background-color: royalblue;
+}

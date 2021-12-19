@@ -2,15 +2,16 @@
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>kafka util</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/main.css}">
     <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
 </head>
 <body>
-<div>
+<div class="container">
     <form id="form" action="/query">
         <table style="width: 100%">
             <tr>
-                <td><label for="">topic</label><input id="topic" name="topic" th:value="${topic}"
-                                                      type="text">
+                <td><label for="">topic</label>
+                    <input id="topic" name="topic" th:value="${topic}" type="text">
                 </td>
                 <td><label for="">regex</label><input id="regex" name="regex" th:value="${regex}"
                                                       type="text"><br>
