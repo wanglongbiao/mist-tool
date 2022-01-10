@@ -1,6 +1,20 @@
 spring:
   thymeleaf:
     cache: false
+  kafka:
+    bootstrap-servers: 10.58.76.10:9092
+  redis:
+    database: 0
+    host: 10.58.76.19
+    password: hlxredis_065
+    port: 6379
+#    lettuce:
+#      pool:
+#        max-active: 18
+#        min-idle: 1
+#        max-idle: 18
+#        max-wait: 10000ms
+
 #  kafka:
 #    bootstrap-servers: 10.100.0.221:9092
 #  datasource:

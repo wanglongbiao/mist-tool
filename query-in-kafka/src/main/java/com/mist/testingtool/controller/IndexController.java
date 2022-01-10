@@ -50,21 +50,23 @@ public class IndexController {
     @RequestMapping("/queryLag")
     public List<String> queryLag() {
         LocalDateTime now = LocalDateTime.now();
-//        LocalDateTime time15m = now.minusMinutes(2);
-        List<String> messageList = kafkaService.queryByText("unionTargetJs", ".*", now.minusMinutes(30).toString(), now.toString());
+        int minutes = 1;
+        int seconds = 30;
+        List<String> messageList = kafkaService.queryByText("unionTargetJs", ".*", now.minusMinutes(minutes).toString(), now.toString());
         List<String> resultList = new ArrayList<>();
         messageList.forEach(data -> {
             JSONObject jsonObject = JSON.parseObject(data);
             Long lastTm = jsonObject.getLong("lastTm");
             Long timestamp = jsonObject.getLong("timestamp");
+            Long targetId = jsonObject.getLong("id");
             LocalDateTime lastTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(lastTm), ZoneId.systemDefault());
             LocalDateTime kafkaTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
-            if (kafkaTime.minusMinutes(2).isAfter(lastTime)) {
-                log.info("find target before 2m, diff: {}s, lastTm: {}, kafka time: {}", Duration.between(lastTime, kafkaTime).getSeconds(), lastTime, kafkaTime);
+            if (kafkaTime.minusSeconds(seconds).isAfter(lastTime)) {
+                log.info("diff: {}s, lastTm: {}, kafka time: {}, target id {}", Duration.between(lastTime, kafkaTime).getSeconds(), lastTime, kafkaTime, targetId);
                 resultList.add(String.valueOf(jsonObject));
             }
         });
-
+        log.info("{} 分钟内延迟超过 {}s 的目标数量：{}", minutes, seconds, resultList.size());
         return resultList;
     }
 }

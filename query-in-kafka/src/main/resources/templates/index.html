@@ -10,6 +10,13 @@
     <form id="form" action="/query">
         <table style="width: 100%">
             <tr>
+                <td>kafka server</td>
+                <td><select name="kafkaServer" id="">
+                    <option value="10.58.76.10:9092">center</option>
+                    <option value=""></option>
+                </select></td>
+            </tr>
+            <tr>
                 <td><label for="">topic</label>
                     <input id="topic" name="topic" th:value="${topic}" type="text">
                 </td>
@@ -32,6 +39,10 @@
             </tr>
         </table>
     </form>
+    <div>
+        <button onclick="queryLag()">query lag</button>
+        <span id="info"></span>
+    </div>
 </div>
 <div>
 
@@ -40,6 +51,18 @@
     $('#form').submit(function (event) {
         console.log("submit ...")
     })
+
+    function queryLag() {
+        $.ajax({
+                   'url': '/queryLag',
+                   'success': function (data) {
+                       console.log(data)
+                       $('info').text('length: ' + data.length)
+                   }
+               })
+    }
+
+    // setInterval(queryLag, 60000)
 </script>
 </body>
 </html>

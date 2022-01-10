@@ -10,6 +10,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.consumer.OffsetAndTimestamp;
 import org.apache.kafka.common.PartitionInfo;
 import org.apache.kafka.common.TopicPartition;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -28,6 +29,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class KafkaServiceImpl implements KafkaService {
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String servers;
+
     @Override
     public void queryByText(String topic, String regex, String startTime) {
         queryByText(topic, regex, startTime, LocalDateTime.now().toString());
@@ -96,9 +100,8 @@ public class KafkaServiceImpl implements KafkaService {
 
     private KafkaConsumer<String, String> getConsumer() {
         Properties props = new Properties();
-//        props.put("bootstrap.servers", "10.134.162.204:9092");
-        props.put("bootstrap.servers", "10.58.76.10:9092");// center
-//        props.put("bootstrap.servers", "10.100.0.214:9092");
+//        props.put("bootstrap.servers", "10.134.162.204:11092");// pan-yu
+        props.put("bootstrap.servers", servers);// center
         props.put("group.id", "sub-center-testing-by-wlb");
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
