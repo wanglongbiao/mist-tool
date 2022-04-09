@@ -2,6 +2,7 @@ package com.mist.testingtool.service.impl;
 
 import com.mist.testingtool.service.RedisService;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
@@ -20,7 +21,7 @@ class RedisServiceImplTest {
     private RedisService redisService;
 
     @SneakyThrows
-//    @Test
+    @Test
     void findAbnormalData() {
         while (true) {
             log.info("start checking...");
@@ -29,5 +30,10 @@ class RedisServiceImplTest {
             abnormalData.forEach(System.out::println);
             TimeUnit.SECONDS.sleep(30);
         }
+    }
+
+    @Test
+    void testSearchAreaAlarmCondition() {
+        redisService.searchAreaAlarmCondition("1475346977708445696");
     }
 }

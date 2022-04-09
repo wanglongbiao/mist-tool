@@ -5,15 +5,15 @@ spring:
     bootstrap-servers: 10.58.76.10:9092
   redis:
     database: 0
-    host: 10.58.76.19
+    host: 10.58.76.19 # center
+#    host: 10.134.156.225 # en-ping
     password: hlxredis_065
     port: 6379
-#    lettuce:
-#      pool:
-#        max-active: 18
-#        min-idle: 1
-#        max-idle: 18
-#        max-wait: 10000ms
+    lettuce:
+      pool:
+        max-active: 18
+        min-idle: 1
+        max-idle: 18
 
 #  kafka:
 #    bootstrap-servers: 10.100.0.221:9092
@@ -26,4 +26,7 @@ spring:
 #    url: jdbc:mysql://virtual:3306/hscp?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
 #    username: root
 #    password: hscpDBHlx
+logging:
+  pattern:
+    console: "%d %clr(%5level) %m%n"
 #    url: jdbc:mysql://10.100.0.128:3306/hscp?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai

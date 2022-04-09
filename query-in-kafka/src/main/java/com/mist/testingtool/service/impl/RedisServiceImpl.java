@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,9 @@ public class RedisServiceImpl implements RedisService {
         List<String> resp = new ArrayList<>();
         HashOperations<String, String, String> hashOperations = stringRedisTemplate.opsForHash();
         stringRedisTemplate.keys("newAlarm:*").forEach(key -> {
+            if (key.contains("flag")) {
+                return;
+            }
             log.info("check {}", key);
             hashOperations.entries(key).forEach((k, v) -> {
                 JSONObject jsonObject = JSON.parseObject(v);
@@ -39,4 +43,18 @@ public class RedisServiceImpl implements RedisService {
         });
         return resp;
     }
+
+    @Override
+    public void searchAreaAlarmCondition(String areaId) {
+        AtomicInteger i = new AtomicInteger(1);
+        stringRedisTemplate.opsForList().range("areaAlarmInfo", 0, -1).forEach(item -> {
+            if (item.contains(areaId)) {
+                log.info("found {} in {}", areaId, item);
+            }else{
+                log.info("{}. skip {}", i.getAndIncrement(),  item);
+            }
+        });
+    }
+
+
 }

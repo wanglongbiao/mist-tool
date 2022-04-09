@@ -50,6 +50,7 @@ public class ExcelService implements CommandLineRunner {
     private void doWork() throws Exception {
         deleteAndCreateDestPath();
         long start = System.currentTimeMillis();
+        excelFileName = excelFileName.replaceAll("\\\\","/");
         Workbook workbook = new XSSFWorkbook(excelFileName);
         long end = System.currentTimeMillis();
         logger.info("读文件耗时(ms)：" + (end - start));
