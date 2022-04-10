@@ -81,6 +81,7 @@ export default class OlMap extends Component {
         // vectorSource.addFeature(new Feature(new Point(fromLonLat([120.317777, 26.948889]))))
         // vectorSource.addFeature(new Feature(new Point(fromLonLat([120.318, 26.948889]))))
         this.addWkt()
+        // this.addTestCircle()
     }
 
     addWkt = wkt => {
@@ -92,5 +93,13 @@ export default class OlMap extends Component {
         let wkt1 = 'POLYGON ((108.91296386718746 18.2552737236136, 109.09835815429683 18.2927646679165, 109.1457366943359 18.198532912099026, 108.99261474609371 18.14079485121475, 108.86936187744138 18.116323816056436, 108.91296386718746 18.2552737236136))'
         let feature = format.readFeature(wkt1, option)
         this.vectorLayer.getSource().addFeature(feature)
+    }
+    // test circle
+    addTestCircle = ()=>{
+        let c1 = new Circle(fromLonLat([120, 20]), 5000)
+        let circleFeature = new Feature({
+            geometry: c1,
+        });
+        this.vectorLayer.getSource().addFeature(circleFeature)
     }
 }
