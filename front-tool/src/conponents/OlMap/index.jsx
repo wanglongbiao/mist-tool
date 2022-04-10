@@ -6,7 +6,6 @@ import { fromLonLat, toLonLat } from 'ol/proj'
 import MousePosition from 'ol/control/MousePosition'
 import { toStringXY, toStringHDMS } from 'ol/coordinate'
 import { ScaleLine } from 'ol/control';
-import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import VectorLayer from 'ol/layer/Vector';
 import { Circle } from 'ol/geom';
@@ -20,7 +19,9 @@ export default class OlMap extends Component {
         let zoom = localStorage.zoom ? localStorage.zoom : 3
         this.state = { center: center, zoom: zoom }
         let osmTileLayer = new TileLayer({
-            source: new OSM(),
+            source: new OSM({
+                attributions: '地图工具'
+            }),
         })
         let debugLayer = new TileLayer({
             source: new TileDebug(),
@@ -47,8 +48,14 @@ export default class OlMap extends Component {
     render() {
         console.log('render..');
         return (
-            <div> Ol map
-                <div id="map" className="map"></div>
+            <div>
+                <div id="map" className="map">
+                </div>
+                <span id="mouse-position"></span>
+                <div>
+                    <input type="text" placeholder='输入 wkt' />
+                    <button>查看</button>
+                </div>
             </div>
         )
     }
@@ -95,9 +102,9 @@ export default class OlMap extends Component {
         this.vectorLayer.getSource().addFeature(feature)
     }
     // test circle
-    addTestCircle = ()=>{
+    addTestCircle = () => {
         let c1 = new Circle(fromLonLat([120, 20]), 5000)
-        let circleFeature = new Feature({
+        let circleFeature = new ol.Feature({
             geometry: c1,
         });
         this.vectorLayer.getSource().addFeature(circleFeature)
