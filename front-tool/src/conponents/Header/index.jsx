@@ -6,10 +6,10 @@ export default class Header extends Component {
     let target = event.target
     if (event.keyCode != 13) return
     let value = target.value.trim()
-    if(!value) return
-    let todo={id:nanoid(), name: value,done:false}
+    if (!value) return
+    let todo = { id: nanoid(), name: value, done: false }
     this.props.addTodo(todo)
-    target.value=''
+    target.value = ''
   }
 
   render() {
