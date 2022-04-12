@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 
 export default class Item extends Component {
-    state = {}
+    state = { hover: false }
     render() {
         const { id, name, done } = this.props
         return (
-            <li style={{backgroundColor: this.state.hover ? '#ddd' : 'white' }} onMouseEnter={this.handleMourse} onMouseLeave={this.handleMourse}>
+            <li style={{ backgroundColor: this.state.hover ? '#ddd' : 'white' }} onMouseEnter={this.handleMourse} onMouseLeave={this.handleMourse}>
                 <label>
-                    <input type='checkbox' defaultChecked={done} />
+                    <input type='checkbox' defaultChecked={done} onChange={this.handleChecked(id)}/>
                     <span>{name}</span>
                 </label>
-                <button style={{ display: this.state.hover ? 'inline' : 'none' }}>删除</button>
+                <button onClick={this.handleDelete(this.state.id)} style={{ display: this.state.hover ? 'inline' : 'none' }}>删除</button>
             </li>
         )
     }
@@ -25,5 +25,15 @@ export default class Item extends Component {
                 this.setState({ hover: false })
                 break
         }
+    }
+
+    handleDelete = (id) => {
+        return id => {
+            this.props.deleteTodo(id)
+        }
+    }
+
+    handleChecked = (id) =>{
+        return (event) => this.props.updateTodo(id, event.target.checked)
     }
 }
