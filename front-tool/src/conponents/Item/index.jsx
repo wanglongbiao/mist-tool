@@ -7,7 +7,7 @@ export default class Item extends Component {
         return (
             <li style={{ backgroundColor: this.state.hover ? '#ddd' : 'white' }} onMouseEnter={this.handleMourse} onMouseLeave={this.handleMourse}>
                 <label>
-                    <input type='checkbox' defaultChecked={done} onChange={this.handleChecked(id)}/>
+                    <input type='checkbox' defaultChecked={done} onChange={this.handleChecked(id)} />
                     <span>{name}</span>
                 </label>
                 <button onClick={this.handleDelete(id)} style={{ display: this.state.hover ? 'inline' : 'none' }}>删除</button>
@@ -32,7 +32,7 @@ export default class Item extends Component {
         }
     }
 
-    handleChecked = (id) =>{
+    handleChecked = (id) => {
         return (event) => this.props.updateTodo(id, event.target.checked)
     }
 }

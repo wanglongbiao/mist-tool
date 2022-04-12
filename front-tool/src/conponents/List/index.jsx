@@ -4,7 +4,7 @@ import Item from '../Item'
 export default class List extends Component {
 
   render() {
-    const { todos, deleteTodo , updateTodo} = this.props
+    const { todos, deleteTodo, updateTodo } = this.props
     return (
       <div>
         <ul>
