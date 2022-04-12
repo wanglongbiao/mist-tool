@@ -10,13 +10,12 @@ export default class Item extends Component {
                     <input type='checkbox' defaultChecked={done} onChange={this.handleChecked(id)}/>
                     <span>{name}</span>
                 </label>
-                <button onClick={this.handleDelete(this.state.id)} style={{ display: this.state.hover ? 'inline' : 'none' }}>删除</button>
+                <button onClick={this.handleDelete(id)} style={{ display: this.state.hover ? 'inline' : 'none' }}>删除</button>
             </li>
         )
     }
 
     handleMourse = event => {
-        console.log(event);
         switch (event.type) {
             case 'mouseenter':
                 this.setState({ hover: true })
@@ -28,7 +27,7 @@ export default class Item extends Component {
     }
 
     handleDelete = (id) => {
-        return id => {
+        return () => {
             this.props.deleteTodo(id)
         }
     }
