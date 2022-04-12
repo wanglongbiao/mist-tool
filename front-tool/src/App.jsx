@@ -29,9 +29,7 @@ export default class App extends Component {
   }
 
   deleteTodo = (id) => {
-    let newList = this.state.todos.filter(todo => {
-      if (todo.id != id) return todo
-    })
+    let newList = this.state.todos.filter(todo => todo.id != id)
     this.setState({ todos: newList })
   }
 
