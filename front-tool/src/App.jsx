@@ -17,8 +17,7 @@ export default class App extends Component {
       <div>
         <Header addTodo={this.addTodo} />
         <List todos={this.state.todos} deleteTodo={this.deleteTodo} updateTodo={this.updateTodo} />
-        <Footer />
-
+        <Footer todos={this.state.todos} toggleCheckAll={this.toggleCheckAll} />
         {/* <OlMap /> */}
       </div>
     )
@@ -37,6 +36,11 @@ export default class App extends Component {
     let newList = this.state.todos.map(todo => {
       return { ...todo, done: todo.id == id ? done : todo.done }
     })
+    this.setState({ todos: newList })
+  }
+
+  toggleCheckAll = (done) => {
+    let newList = this.state.todos.map(todo => { return { ...todo, done } })
     this.setState({ todos: newList })
   }
 }
