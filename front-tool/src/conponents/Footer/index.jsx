@@ -6,9 +6,10 @@ export default class Footer extends Component {
     let count1 = todos.reduce((pre, curr) => pre + (curr.done ? 1 : 0), 0)
     return (
       <div>
-        <lable>
-          <input type='checkbox' checked={count1 == todos.length} onChange={this.handleCheckAll} /> 已选{count1} / 总数 {todos.length}
-        </lable>
+        <label>
+          <input type='checkbox' checked={count1 == todos.length} onChange={this.handleCheckAll} />
+          <span>已选{count1} / 总数 {todos.length}</span> 
+        </label>
       </div>
     )
   }
