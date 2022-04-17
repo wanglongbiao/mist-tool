@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom'
 import About from './pages/About'
 import Home from './pages/Home'
 
 export default class App extends Component {
   render() {
     return (
-      <div className='container'>
+      <div className='row'>
         <BrowserRouter>
           <div>
-            <Link to='/home'>Home</Link>
-            <Link to='/about'>About</Link>
+            <NavLink className='list-group-item' to='/home'>Home</NavLink>
+            <NavLink className='list-group-item' to='/about'>About</NavLink>
           </div>
           <div>
             <Routes>
