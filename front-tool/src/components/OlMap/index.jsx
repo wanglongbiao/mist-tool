@@ -12,6 +12,7 @@ import { Circle } from 'ol/geom';
 import WKT from 'ol/format/WKT';
 import 'ol/ol.css';
 import './index.css'
+import { Button, Input } from 'antd'
 export default class OlMap extends Component {
     constructor(props) {
         super(props)
@@ -49,9 +50,9 @@ export default class OlMap extends Component {
         return (
             <div>
                 <div>
-                    <input type="text" placeholder='输入 wkt' />
-                    <button>查看</button>
-                    <button>测距</button>
+                    <Input placeholder='输入 wkt' />
+                    <Button type="primary">查看</Button>
+                    <Button type="primary">测距</Button>
                 </div>
                 <div id="map" className="map"></div>
                 <span id="mouse-position"></span>

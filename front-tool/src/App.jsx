@@ -21,7 +21,8 @@ export default class App extends Component {
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
               <Menu.Item key="1">首页</Menu.Item>
               <Menu.Item key="2">文章</Menu.Item>
-              <Menu.Item key="3">关于</Menu.Item>
+              <Menu.Item key="3">留言</Menu.Item>
+              <Menu.Item key="4">关于</Menu.Item>
             </Menu>
           </Header>
           <Layout>
@@ -34,21 +35,18 @@ export default class App extends Component {
               >
                 <SubMenu key="sub1" icon={<UserOutlined />} title="地图工具">
                   <Menu.Item key="1">OpenLayers 工具</Menu.Item>
-                  <Menu.Item key="2">option2</Menu.Item>
-                  <Menu.Item key="3">option3</Menu.Item>
-                  <Menu.Item key="4">option4</Menu.Item>
+                  <Menu.Item key="2">Arcgis 工具</Menu.Item>
                 </SubMenu>
-                <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-                  <Menu.Item key="5">option5</Menu.Item>
-                  <Menu.Item key="6">option6</Menu.Item>
-                  <Menu.Item key="7">option7</Menu.Item>
-                  <Menu.Item key="8">option8</Menu.Item>
+                <SubMenu key="sub2" icon={<LaptopOutlined />} title="日历">
+                  <Menu.Item key="5">万年历</Menu.Item>
+                  <Menu.Item key="6">在线翻译</Menu.Item>
+                  <Menu.Item key="7">格式转换</Menu.Item>
                 </SubMenu>
               </Menu>
             </Sider>
             <Layout style={{ padding: '0 24px 24px' }}>
               <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item>Home</Breadcrumb.Item>
+                <Breadcrumb.Item>首页</Breadcrumb.Item>
                 <Breadcrumb.Item>List</Breadcrumb.Item>
                 <Breadcrumb.Item>App</Breadcrumb.Item>
               </Breadcrumb>
@@ -56,7 +54,7 @@ export default class App extends Component {
                 className="site-layout-background"
                 style={{
                   padding: 24,
-                  margin: 0,
+                  magin: 0,
                   minHeight: 280,
                 }}
               >
