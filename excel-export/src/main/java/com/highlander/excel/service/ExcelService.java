@@ -1,16 +1,5 @@
 package com.highlander.excel.service;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -24,6 +13,25 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ExcelService implements CommandLineRunner {
@@ -39,6 +47,8 @@ public class ExcelService implements CommandLineRunner {
     private String excelFileName;
     @Autowired
     private ExcelUtil excelUtil;
+    @Autowired
+    private ApplicationContext applicationContext;
 
     /*
     流程：
@@ -50,7 +60,7 @@ public class ExcelService implements CommandLineRunner {
     private void doWork() throws Exception {
         deleteAndCreateDestPath();
         long start = System.currentTimeMillis();
-        excelFileName = excelFileName.replaceAll("\\\\","/");
+        excelFileName = excelFileName.replaceAll("\\\\", "/");
         Workbook workbook = new XSSFWorkbook(excelFileName);
         long end = System.currentTimeMillis();
         logger.info("读文件耗时(ms)：" + (end - start));
@@ -61,10 +71,10 @@ public class ExcelService implements CommandLineRunner {
 //            if (row.getRowNum() <= 0) continue;// 跳过表头
             if (row.getRowNum() == 0) {
                 row.forEach(cell -> {
-                    if(cell.getStringCellValue().equals("姓名")){
+                    if (cell.getStringCellValue().equals("姓名")) {
                         nameIndex.set(cell.getColumnIndex());
                     }
-                    if(cell.getStringCellValue().equals("打卡时间")){
+                    if (cell.getStringCellValue().equals("打卡时间")) {
                         timeIndex.set(cell.getColumnIndex());
                     }
                 });
@@ -84,10 +94,14 @@ public class ExcelService implements CommandLineRunner {
             }
         }
         for (Row row : sheet) {
-            if (row.getRowNum() <= 0) continue;// 跳过表头
+            if (row.getRowNum() <= 0) {
+                continue;// 跳过表头
+            }
             String leaveTimeStr = row.getCell(timeIndex.get()).getStringCellValue();
             LocalDateTime clockTime = LocalDateTime.parse(leaveTimeStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-            if (StringUtils.isBlank(leaveTimeStr)) continue;// 跳过下班时间为空的
+            if (StringUtils.isBlank(leaveTimeStr)) {
+                continue;// 跳过下班时间为空的
+            }
             boolean crossDay = leaveTimeStr.contains("次日");
 //            String week = row.getCell(5).getStringCellValue();//19-09-26 星期四
             boolean isWorkDay = excelUtil.isWorkday(clockTime);// 是否是法定工作日
@@ -97,9 +111,12 @@ public class ExcelService implements CommandLineRunner {
             }
 //            LocalTime leaveTime = LocalTime.parse(leaveTimeStr);
             if (isWorkDay && clockTime.getHour() >= 20) // 符合工作日，加班到晚上8点的
+            {
                 writeToFile(row, false, false, clockTime);
-            else if (!isWorkDay)// 周末加班的
+            } else if (!isWorkDay)// 周末加班的
+            {
                 writeToFile(row, true, false, clockTime);
+            }
         }
         postProcess();
     }
@@ -132,7 +149,9 @@ public class ExcelService implements CommandLineRunner {
 //        String date = endDateTime.toLocalDate().toString();//19-09-26 星期四
         String beginTime = startWorkTime.toLocalTime().toString();//08:20
         String endTime = endDateTime.toLocalTime().toString();//08:20
-        if (isCrossDay) logger.info("跨天：" + userName);
+        if (isCrossDay) {
+            logger.info("跨天：" + userName);
+        }
         endTime = isCrossDay ? endTime.split(" ")[1] : endTime;
 //        String[] dateArr = date.split(" ");
         LocalDate start = endDateTime.toLocalDate();
@@ -265,7 +284,7 @@ public class ExcelService implements CommandLineRunner {
                 currentFileDate = currentFileDate.replace("-", "");
             }
         }
-        if (currentFileDate == null){
+        if (currentFileDate == null) {
             currentFileDate = LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE);
         }
         return ExcelService.class.getClassLoader().getResource("").getPath() + currentFileDate;
@@ -287,6 +306,7 @@ public class ExcelService implements CommandLineRunner {
         openDestPath();
         long end = System.currentTimeMillis();
         logger.info("#### end #### takes(s):" + ((end - start) / 1000.0));
+        SpringApplication.exit(applicationContext, () -> 0);
     }
 
     private void openDestPath() {
